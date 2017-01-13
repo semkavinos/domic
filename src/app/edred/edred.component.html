@@ -1,0 +1,39 @@
+<h2>Редактор учебных единиц</h2>
+
+<h3>Редактор</h3>
+
+<div class="feed animation" *ngFor="let item of feeds$ | async">
+  <a>{{item.name}}</a>
+  <div class="text">
+    {{item.text}}
+  </div>
+  <div class="actions">
+    <a class="reply"><button class="ui button icon basic red" (click)="removeFeed(item.id)">Remove</button></a>
+  </div>
+  <div class="comments">
+
+    <div class="comment animation animation-comment" *ngFor="let comment of item?.comments">
+      <div class="text">
+        {{comment.text}}
+      </div>
+    </div>
+
+    <form class="form" #commentForm="ngForm" (submit)="submitCommentOnFeed(item.id, commentForm)" [ngClass]="{'error': commentForm.errors && (commentForm.dirty || commentForm.touched)}">
+      <div class="field">
+        <input placeholder="Enter comment..." type="text" name="text" required ngModel />
+      </div>
+      <button [disabled]="!commentForm.valid" class="ui blue labeled submit icon button">
+        <i class="icon edit"></i> Add comment
+      </button>
+    </form>
+  </div>
+  <div class="clear"></div>
+</div>
+
+<br/>
+
+<form class="form" [formGroup]="form">
+  <app-ui-input label="Название учебной единицы" placeholder="Введите название учебной единицы...." [control]="form.get('name')"></app-ui-input>
+</form>
+
+<ace-editor [text]="text" #editor style="height:150px;"></ace-editor>
