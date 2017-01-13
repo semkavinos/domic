@@ -11,7 +11,7 @@ import { WeatherService } from './weather/weather.service';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
   ],
   imports: [
     BrowserModule,

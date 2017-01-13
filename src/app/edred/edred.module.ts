@@ -3,8 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AceEditorDirective } from 'ng2-ace-editor';
 
-import { DashboardComponent } from './dashboard.component';
-import { routing } from './dashboard.router';
+import { EdRedComponent } from './edred.component';
+import { routing } from './edred.router';
 import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
@@ -16,10 +16,10 @@ import { SharedModule } from '../shared/shared.module';
     routing
   ],
   declarations: [
-    DashboardComponent
+    EdRedComponent
   ],
   bootstrap: [
-    DashboardComponent
+    EdRedComponent
   ]
 })
-export class DashboardModule {}
+export class EdRedModule {}
