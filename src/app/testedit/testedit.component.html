@@ -1,0 +1,41 @@
+<h2>TestEdit component</h2>
+
+<h3>Questions</h3>
+
+<div *ngFor="let question of questions, let i = index">
+  <div style="border: 1px solid black;">
+  <div (click)="setCurrent(i)">{{question.text}}</div>
+    <div *ngIf="i == curQuestion">
+      <button (click)="deleteQuestion(i)">X</button>
+      <div>Тип вопроса: 
+         <input type="radio" name="questionType" value="simple">Одновыборный
+         <input type="radio" name="questionType" value="multi">Многовыборный
+         <input type="radio" name="questionType" value="open">Открытый<br/>
+      </div>
+      <div>Ответы:
+ 	<div *ngFor="let answer of question.answers, let i = index">
+ 	   {{answer.text}}
+ 	</div>
+      </div>
+      <form (submit)="addAnswer(textanswer.value, rightanswer.value)">
+        <label>Добавить ответ: </label><br />
+        <textarea rows="4" cols="50" #textanswer>
+        </textarea>
+        <input type="checkbox" #rightanswer>
+        <button type="submit">Добавить</button>
+        <br />
+      </form>
+
+    </div>
+  </div>
+</div>
+
+<br/>
+
+<form (submit)="addQuestion(textquestion.value)">
+  <label>Добавить вопрос: </label><br />
+  <textarea rows="4" cols="50" #textquestion>
+  </textarea>
+  <button type="submit">Добавить</button>
+  <br />
+</form>
