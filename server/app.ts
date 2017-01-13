@@ -8,8 +8,9 @@ import { loginRouter } from './routes/login';
 import { protectedRouter } from './routes/protected';
 import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
-import { userRouter } from "./routes/user";
 import {studyEntityRouter} from './routes/study_entity';
+import { userRouter } from './routes/user';
+import * as models from './models';
 
 const app: express.Application = express();
 
@@ -19,6 +20,34 @@ app.use(cors());
 app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
+
+// passport
+
+let passport = require('passport');
+let LocalStrategy = require('passport-local').Strategy;
+
+passport.use(new LocalStrategy({
+        usernameField: 'email',
+        passwordField: 'password'
+    },
+    function (email, password, done){
+        models.User.findOne({'email': email})
+        .exec((err, user) => {
+            if (err || !user) {
+                user = {};
+            }
+            if (password === user.password) {
+                done(true);
+            } else {
+                return done(null, false, {massage: 'Wrong data'});
+            }
+        });
+    }
+));
+
+app.post('/login/test', passport.authenticate('local',
+    { failureRedirect: 'http://localhost:4200',
+      successRedirect: 'http://localhost:4200/profile'}));
 
 // api routes
 app.use('/api/secure', protectedRouter);
