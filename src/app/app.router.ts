@@ -9,6 +9,7 @@ const routes: Route[] = [
   { loadChildren: 'app/auth/auth.module#AuthModule', path: 'auth' },
   { loadChildren: 'app/study_entity/study_entity.module#StudyEntityModule', path: 'study_entity' },
   { loadChildren: 'app/edred/edred.module#EdRedModule', path: 'edred'},
+  { loadChildren: 'app/cource/cource.module#CourceModule', path: 'cource' },
 ];
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(
