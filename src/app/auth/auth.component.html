@@ -1,6 +1,15 @@
-<h2>Регистрация</h2>
+<div>
+<p><sign-up [hidden]="registerMode"></sign-up></p>
+<p><log-in [hidden]="!registerMode"></log-in></p>
 
-
-<p><sign-up></sign-up></p>
-<h2>Авторизация</h2>
-<p><log-in></log-in></p>
+ <div [hidden]="!registerMode" class="row ">
+    <div  id="rega1" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <a  (click)="registerMode=!registerMode" tabindex="5" class="noreg">Ещё не зарегистрированы?</a>
+    </div>
+    </div>
+ <div [hidden]="registerMode" class="row ">
+    <div id="rega2" class="col-md-12 col-sm-12 col-xs-12 col-lg-12">
+        <a  (click)="registerMode=!registerMode" tabindex="5" class="noreg">Уже зарегистрированы?Войти</a>
+    </div>
+    </div>
+</div>
