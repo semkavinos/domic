@@ -9,6 +9,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./auth.component.css']
 })
 export class AuthComponent {
+  registerMode = true;
   constructor() {
   }
 }
