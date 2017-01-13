@@ -1,6 +1,6 @@
 import 'rxjs/add/operator/switchMap';
 import { Component, OnInit}      from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Location }               from '@angular/common';
 import {Subscription} from 'rxjs/Subscription';
 
@@ -13,15 +13,28 @@ import{Entity} from './entity';
   styleUrls: ['./study_entity.component.css']
 })
 export class StudyEntityComponent implements OnInit {
-  entity: Entity = new Entity();
-  constructor(private route: ActivatedRoute, private service: EntityService) {}
+  entities: Entity[] = [];
+  constructor(private router: Router, private service: EntityService, private route: ActivatedRoute) {}
+  getEntities(): void {
+    this.service
+        .getEntities()
+        .then(entities => this.entities = entities);
+  }
   ngOnInit(): void {
     this.route.params
       .switchMap((params: Params) => {
-        return this.service.getEntity(+params['id']);
+        return this.service.getEntities();
       })
-      .subscribe(entity => {
-        this.entity = entity;
+      .subscribe(entities => {
+        this.entities = entities;
+      });
+  }
+  add(name: string): void {
+    name = name.trim();
+    if (!name) { return; }
+    this.service.create(name)
+      .then(hero => {
+        this.entities.push(hero);
       });
   }
 }

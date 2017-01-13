@@ -4,6 +4,7 @@ import { Headers, Http } from '@angular/http';
 import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class EntityService {
+  private headers = new Headers({'Content-Type': 'application/json'});
   private entityUrl = 'http://localhost:4300/api/study_entity';
   constructor(private http: Http) { }
   getEntities(): Promise<Entity[]> {
@@ -18,5 +19,11 @@ export class EntityService {
       .then(response => {
         return response.json() as Entity;
       });
+  }
+  create(name: string): Promise<Entity> {
+    return this.http
+      .post(this.entityUrl, JSON.stringify({name: name}), {headers: this.headers})
+      .toPromise()
+      .then(res => res.json().data);
   }
 }

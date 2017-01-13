@@ -4,11 +4,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule }    from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 
-import { StudyEntityComponent } from './study_entity.component';
+import { UnitComponent } from './unit.component';
 import { routing } from './study_entity.router';
 import { SharedModule } from '../shared/shared.module';
 import{EntityService} from './service';
-
+import { StudyEntityComponent } from './study_entity.component';
 
 @NgModule({
   imports: [
@@ -20,11 +20,12 @@ import{EntityService} from './service';
     routing
   ],
   declarations: [
+    UnitComponent,
     StudyEntityComponent
   ],
   providers: [ EntityService ],
   bootstrap: [
-    StudyEntityComponent
+    UnitComponent
   ]
 })
 export class StudyEntityModule {}

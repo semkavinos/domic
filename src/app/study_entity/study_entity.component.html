@@ -1,5 +1,13 @@
-<h1>{{entity.name}}</h1>
+<h2>Study entity</h2>
 <div>
-  <p class="e2e-inner-html-bound" [innerHTML]="entity.content.html"></p>
+  <label>Unit name:</label> <input #unitName />
+  <button (click)="add(unitName.value); unitName.value=''">
+    Add
+  </button>
 </div>
-    
+<ul class="entities">
+  <li *ngFor="let entity of entities">
+    <span class="badge">{{entity.id}}</span>
+    <a routerLink="/study_entity/{{entity.id}}">{{entity.name}}</a>
+  </li>
+</ul>
