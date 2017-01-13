@@ -1,7 +1,6 @@
 <h2>Редактор учебных единиц</h2>
 
 <h3>Редактор</h3>
-<app-ui-notes *ngIf="!(feeds$ | async)?.length" type="info" text="No feed, add one."></app-ui-notes>
 
 <div class="feed animation" *ngFor="let item of feeds$ | async">
   <a>{{item.name}}</a>
@@ -34,9 +33,7 @@
 <br/>
 
 <form class="form" [formGroup]="form">
-  <app-ui-input label="Name" placeholder="Enter name...." [control]="form.get('name')"></app-ui-input>
-  <app-ui-input label="Text" placeholder="Enter text...." [control]="form.get('text')"></app-ui-input>
-  
-  <app-ui-button [disabled]="!form.valid"  text="Add Feed" (click)="submitFeed()"></app-ui-button>
+  <app-ui-input label="Название учебной единицы" placeholder="Введите название учебной единицы...." [control]="form.get('name')"></app-ui-input>
 </form>
 
+<ace-editor [text]="text" #editor style="height:150px;"></ace-editor>
