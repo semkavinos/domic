@@ -32,6 +32,12 @@ cd angular2-express-starter
 # Install dependencies
 npm install
 
+# Create folder if not exists
+mkdir _db
+
+# Run mongodb server
+mongod --dbpath=_db
+
 # start server
 npm run start
 
