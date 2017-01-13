@@ -2,17 +2,20 @@ import * as express from 'express';
 import { json, urlencoded } from 'body-parser';
 import * as path from 'path';
 import * as compression from 'compression';
+import * as cors from 'cors';
 
 import { loginRouter } from './routes/login';
 import { protectedRouter } from './routes/protected';
 import { publicRouter } from './routes/public';
 import { feedRouter } from './routes/feed';
 import { userRouter } from "./routes/user";
+import {studyEntityRouter} from './routes/study_entity';
 
 const app: express.Application = express();
 
 app.disable('x-powered-by');
 
+app.use(cors());
 app.use(json());
 app.use(compression());
 app.use(urlencoded({ extended: true }));
@@ -23,6 +26,7 @@ app.use('/api/login', loginRouter);
 app.use('/api/public', publicRouter);
 app.use('/api/feed', feedRouter);
 app.use('/api/user', userRouter);
+app.use('/api/study_entity', studyEntityRouter);
 
 if (app.get('env') === 'production') {
 
