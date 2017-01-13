@@ -11,6 +11,7 @@ import { IAppState } from '../store';
   templateUrl: './testedit.component.html',
   styleUrls: ['./testedit.component.css']
 })
+
 export class TestEditComponent {
   curQuestion: number = 0;
   questions: Question[] = [];
@@ -27,6 +28,7 @@ export class TestEditComponent {
 
   deleteQuestion(i) {
     this.questions.splice(i, 1);
+    this.curQuestion = - 1;
   }
 
   setCurrent(i) {
@@ -37,11 +39,21 @@ export class TestEditComponent {
     }
   }
 
-  addAnswer(text) {
-
+  addAnswer(text, right) {
+    if (this.curQuestion === -1) return;
+    let a: Answer = {text: text, right: right};
+    this.questions[this.curQuestion].answers.push(a);
   }
 
-
+  changeAnswer(i) {
+    if (this.curQuestion === -1) return;
+    this.questions[this.curQuestion].answers[i].right = !this.questions[this.curQuestion].answers[i].right;
+  }
+  
+  deleteAnswer(i) {
+    if (this.curQuestion === -1) return;
+    this.questions[this.curQuestion].answers.splice(i, 1);
+  }
 }
 
 interface Question {
@@ -51,6 +63,6 @@ interface Question {
 }
 
 interface Answer {
-  right: boolean;
   text: string;
+  right: boolean;
 }
